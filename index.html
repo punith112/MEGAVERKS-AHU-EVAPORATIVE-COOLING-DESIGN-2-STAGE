@@ -1,0 +1,957 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MEGAVERKS × MEGAVENTS | Separation-Plate IDEC AHU</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Saira+Condensed:wght@500;600;700&display=swap">
+<style>
+/* Layout: datasheet sheet. Header strip with brochure-style rule, control rail, full-width 3D stage, legend, two-column notes, drawing title block. */
+:root{
+  --bg:#ebeef2; --surface:#ffffff; --ink:#14223a; --muted:#56637a; --line:#d0d7e0;
+  --accent:#1c4d8f; --on-accent:#ffffff; --accent-2:#de6b23;
+  --scene:#e2e7ed; --floor:#d3dae2; --grid:#c6ced8; --grid-strong:#b3bdc9; --label-bg:rgba(255,255,255,.88);
+  --c-hot:#e8692e; --c-fresh:#5fb4ee; --c-ret:#8f7ff2; --c-cold:#16a3cf; --c-warm:#86d6c4; --c-water:#3f9be0;
+  --f-display:"Saira Condensed","Arial Narrow","Roboto Condensed",sans-serif;
+  --f-body:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d141d; --surface:#142031; --ink:#e1e8f1; --muted:#93a2b6; --line:#26344a;
+    --accent:#86b6f3; --on-accent:#0d141d; --accent-2:#f29350;
+    --scene:#101925; --floor:#16212f; --grid:#1f2c3e; --grid-strong:#2a3b52; --label-bg:rgba(20,32,49,.9);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d141d; --surface:#142031; --ink:#e1e8f1; --muted:#93a2b6; --line:#26344a;
+  --accent:#86b6f3; --on-accent:#0d141d; --accent-2:#f29350;
+  --scene:#101925; --floor:#16212f; --grid:#1f2c3e; --grid-strong:#2a3b52; --label-bg:rgba(20,32,49,.9);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body)}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:clamp(16px,3vw,32px);padding-block:22px 36px;display:grid;gap:16px}
+
+.brandbar{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:78px;padding:10px 18px;background:#fff;border:1px solid var(--line);border-radius:6px;box-shadow:0 1px 2px rgba(20,34,58,.04)}
+.brandmark{display:flex;align-items:center;justify-content:center;min-width:0}
+.brandmark img{display:block;max-width:100%;height:auto;object-fit:contain}
+.logo-megaverks img{width:min(610px,58vw);max-height:68px}
+.logo-megavents img{width:min(225px,28vw);max-height:68px}
+.brand-sep{width:1px;align-self:stretch;background:#d8dee6;flex:none}
+
+.head{display:grid;gap:6px;padding-bottom:16px;position:relative}
+.head::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:min(560px,100%);background:linear-gradient(90deg,var(--ink) 0 84%,var(--accent-2) 84% 100%)}
+.eyebrow{font:600 12px/1.2 var(--f-display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.titlerow{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px}
+h1{margin:0;font:700 clamp(30px,4.4vw,44px)/1 var(--f-display);letter-spacing:.01em;text-transform:uppercase;color:var(--accent);text-wrap:balance}
+.rev{font:500 12px/1 var(--f-mono);padding:5px 8px;border:1px solid var(--line);border-radius:3px;color:var(--muted);background:var(--surface)}
+.lead{margin:0;max-width:68ch;color:var(--muted)}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center}
+.grp{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.seg{gap:0}
+.gl{font:600 11px/1 var(--f-display);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-right:8px}
+button{font:500 13px/1 var(--f-body);color:var(--ink);background:var(--surface);border:1px solid var(--line);padding:8px 11px;border-radius:4px;cursor:pointer;min-height:34px}
+button:hover{border-color:var(--muted)}
+.seg button{border-radius:0;margin-left:-1px}
+.seg button:nth-child(2){border-radius:4px 0 0 4px;margin-left:0}
+.seg button:last-child{border-radius:0 4px 4px 0}
+button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent);position:relative;z-index:1}
+button:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px;position:relative;z-index:2}
+.speedgrp{gap:8px}
+.speedgrp input[type="range"]{width:clamp(140px,18vw,220px);accent-color:var(--accent);cursor:pointer}
+.speedgrp output{font:500 12px/1 var(--f-mono);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:7px 8px;min-width:50px;text-align:center}
+.zoomgrp button{min-width:38px}
+
+.stage{position:relative;height:clamp(420px,66vh,700px);border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--scene)}
+.stage canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+.stage canvas:active{cursor:grabbing}
+.labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.lbl{position:absolute;left:0;top:0;display:flex;align-items:center;gap:5px;height:18px;white-space:nowrap;will-change:transform}
+.lbl.flip{flex-direction:row-reverse}
+.lbl i{width:8px;height:8px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 0 2px var(--label-bg);flex:none}
+.lbl span{font:600 11.5px/1 var(--f-display);letter-spacing:.07em;text-transform:uppercase;color:var(--ink);background:var(--label-bg);border:1px solid var(--line);padding:3px 6px 2px;border-radius:3px}
+.lbl.s-fresh i{background:var(--c-fresh)}
+.lbl.s-ret i{background:var(--c-ret)}
+.hint{position:absolute;right:10px;top:10px;font:500 11px/1.3 var(--f-mono);color:var(--muted);background:var(--label-bg);border:1px solid var(--line);padding:5px 8px;border-radius:3px;pointer-events:none}
+.glmsg{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--muted)}
+.glmsg[hidden]{display:none}
+
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.sw{width:22px;height:6px;border-radius:3px;display:inline-block;flex:none}
+
+.notes{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:28px 44px;padding-top:12px}
+@media (max-width:820px){.notes{grid-template-columns:minmax(0,1fr)}}
+h2{margin:0 0 6px;font:700 20px/1.1 var(--f-display);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+h3{margin:16px 0 8px;font:600 15px/1.2 var(--f-body);display:flex;align-items:center;gap:8px}
+ol{margin:0;padding:0;list-style:none;counter-reset:st;display:grid;gap:8px}
+ol li{counter-increment:st;display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px;max-width:64ch}
+ol li::before{content:counter(st,decimal-leading-zero);font:500 12px/1.95 var(--f-mono);color:var(--accent-2)}
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:9px 12px 9px 0;border-bottom:1px solid var(--line)}
+th{font:600 11px/1.2 var(--f-display);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+td:first-child{font-weight:600;white-space:nowrap;padding-right:18px}
+
+.tblock{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));border:1px solid var(--ink);margin-top:10px}
+.tblock div{padding:8px 10px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;gap:4px;min-width:0}
+.tblock b{font:600 10px/1 var(--f-display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.tblock span{font:500 12.5px/1.35 var(--f-mono);overflow-wrap:anywhere}
+
+@media (max-width:700px){
+  .brandbar{align-items:flex-start;flex-direction:column;gap:10px;padding:12px}
+  .brand-sep{width:100%;height:1px}
+  .logo-megaverks img,.logo-megavents img{width:100%;max-height:none}
+  .logo-megavents{max-width:210px}
+}
+@media (max-width:560px){
+  .hint{display:none}
+  .stage{height:clamp(380px,62vh,560px)}
+  .lbl span{font-size:10.5px}
+  .speedgrp input[type="range"]{width:150px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brandbar" aria-label="Megaverks brand logos">
+    <div class="brandmark logo-megaverks"><img src="assets/megaverks-technologies-logo.png" alt="MEGAVERKS TECHNOLOGIES logo"></div>
+    <div class="brand-sep" aria-hidden="true"></div>
+    <div class="brandmark logo-megavents"><img src="assets/megavents-logo.png" alt="MEGAVENTS logo"></div>
+  </div>
+
+  <header class="head">
+    <div class="eyebrow">Indirect evaporative cooling unit &middot; 2 stage &middot; design and build</div>
+    <div class="titlerow">
+      <h1>Separation-Plate AHU</h1>
+      <span class="rev">Build v2 · Interactive 3D</span>
+    </div>
+    <p class="lead">Fresh air is cooled through the separation plate and never touches water. Room air is chilled by the wet media, gives its cold to the plate, and goes back to the room.</p>
+  </header>
+
+  <div class="toolbar" role="toolbar" aria-label="Model controls">
+    <div class="grp">
+      <button id="bPlay" type="button" aria-pressed="true">Pause</button>
+      <button id="bRotate" type="button" aria-pressed="false" title="Automatically orbit the 3D model">Auto rotate</button>
+      <button id="bWater" type="button" aria-pressed="true">Water on</button>
+      <button id="bLabels" type="button" aria-pressed="true">Labels</button>
+    </div>
+    <div class="grp speedgrp">
+      <label class="gl" for="speedRange">Flow speed</label>
+      <input id="speedRange" type="range" min="25" max="300" value="100" step="25">
+      <output id="speedValue" for="speedRange">1.00×</output>
+    </div>
+    <div class="grp zoomgrp" role="group" aria-label="Zoom controls">
+      <span class="gl">Zoom</span>
+      <button id="bZoomOut" type="button" title="Zoom out">−</button>
+      <button id="bZoomIn" type="button" title="Zoom in">+</button>
+      <button id="bResetView" type="button">Reset view</button>
+    </div>
+    <div class="grp seg" data-k="stream" role="group" aria-label="Airstream">
+      <span class="gl">Stream</span>
+      <button type="button" data-v="both" aria-pressed="true">Both</button>
+      <button type="button" data-v="fresh" aria-pressed="false">Fresh</button>
+      <button type="button" data-v="ret" aria-pressed="false">Return</button>
+    </div>
+    <div class="grp seg" data-k="mode" role="group" aria-label="Casing">
+      <span class="gl">Casing</span>
+      <button type="button" data-v="cutaway" aria-pressed="true">Cutaway</button>
+      <button type="button" data-v="glass" aria-pressed="false">Glass</button>
+      <button type="button" data-v="solid" aria-pressed="false">Solid</button>
+    </div>
+    <div class="grp seg" data-k="view" role="group" aria-label="3D section views">
+      <span class="gl">View</span>
+      <button type="button" data-v="iso" aria-pressed="true">Iso</button>
+      <button type="button" data-v="section" aria-pressed="false">Long section</button>
+      <button type="button" data-v="cross" aria-pressed="false">Cross section</button>
+      <button type="button" data-v="top" aria-pressed="false">Top</button>
+      <button type="button" data-v="end" aria-pressed="false">Return end</button>
+    </div>
+  </div>
+
+  <div class="stage" id="stage">
+    <div class="labels" id="labels" aria-hidden="true"></div>
+    <div class="hint">Drag to rotate &middot; scroll or pinch to zoom &middot; right-drag to pan</div>
+    <div class="glmsg" id="glmsg" hidden>The 3D view needs WebGL, which is turned off in this browser.</div>
+  </div>
+
+  <div class="legend" aria-label="Colour key">
+    <span><i class="sw" style="background:var(--c-hot)"></i>Hot outdoor air</span>
+    <span><i class="sw" style="background:var(--c-fresh)"></i>Fresh air, cooled through plate</span>
+    <span><i class="sw" style="background:var(--c-ret)"></i>Room return air</span>
+    <span><i class="sw" style="background:var(--c-cold)"></i>Return air, chilled by water</span>
+    <span><i class="sw" style="background:var(--c-warm)"></i>Return air after cooling the plate</span>
+    <span><i class="sw" style="background:var(--c-water)"></i>Water</span>
+  </div>
+
+  <section class="notes">
+    <div>
+      <h2>How the air moves</h2>
+      <h3><i class="sw" style="background:var(--c-hot)"></i>Fresh air &middot; outside to room</h3>
+      <ol>
+        <li>Hot outdoor air enters through the louvers into the mixing chamber.</li>
+        <li>It runs up the dry face of the separation plate, gives its heat to the plate, and rises through the top duct into the room. It never touches water.</li>
+      </ol>
+      <h3><i class="sw" style="background:var(--c-ret)"></i>Return air &middot; room to room</h3>
+      <ol>
+        <li>Room air enters through the end louvers and the fine filter.</li>
+        <li>The lower half of the cooling pad and the polymer plate HX chill it with water.</li>
+        <li>The main fan blows the cold air onto the other face of the separation plate, where it takes heat from the fresh air.</li>
+        <li>It rises through the gap beside the plate, above the baffle, into the upper deck.</li>
+        <li>The upper half of the HX and pad chill it again.</li>
+        <li>The secondary fan lifts it into the top box and discharges it to the room.</li>
+      </ol>
+    </div>
+    <div>
+      <h2>Build notes</h2>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Part</th><th>Build</th></tr></thead>
+          <tbody>
+            <tr><td>Casing</td><td>GI outer and inner skin, 25 &plusmn; 2 mm CFC-free PUF, extruded aluminium framework (NTB)</td></tr>
+            <tr><td>Mixing chamber</td><td>Outdoor air louvers on the end face, fresh-air duct collar on top</td></tr>
+            <tr><td>Separation plate</td><td>Full height and depth, sealed on all edges so the two airstreams never mix; only heat passes</td></tr>
+            <tr><td>Main fan</td><td>Lower deck, in front of the wet media, blowing toward the plate</td></tr>
+            <tr><td>Wet media</td><td>Polymer plate HX and 200/300 mm cooling pad, both full height</td></tr>
+            <tr><td>Baffle</td><td>Mid-height, from the plate gap to the return end; splits the lower and upper passes</td></tr>
+            <tr><td>Water</td><td>Distribution header over the HX and pad, SS tank and pump below</td></tr>
+            <tr><td>Return inlet</td><td>End louvers and fine filter</td></tr>
+            <tr><td>Secondary fan</td><td>Small fan in the top box above the pad, discharge grille to the room</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer class="tblock" aria-label="Drawing title block">
+    <div><b>Project</b><span>IDEC unit, 2 stage &middot; design and build</span></div>
+    <div><b>Drawing</b><span>Separation-plate AHU, 3D airflow</span></div>
+    <div><b>Build</b><span>v2 · Interactive 3D</span></div>
+    <div><b>Date</b><span>09-10-2026</span></div>
+    <div><b>Scale</b><span>Not to scale</span></div>
+  </footer>
+</div>
+
+<script src="assets/three.min.js"></script>
+<script src="assets/OrbitControls.js"></script>
+<script>
+(() => {
+  'use strict';
+  const stage = document.getElementById('stage');
+  const labelLayer = document.getElementById('labels');
+  const glmsg = document.getElementById('glmsg');
+  const showFail = () => { glmsg.hidden = false; };
+  if (!window.THREE) { showFail(); return; }
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ antialias: true }); } catch (e) { showFail(); return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.localClippingEnabled = true;
+  renderer.domElement.setAttribute('role', 'img');
+  renderer.domElement.setAttribute('aria-label', '3D model of the separation-plate AHU with animated fresh air and return air streams');
+  stage.prepend(renderer.domElement);
+
+  const reduceMotion = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color('#e2e7ed');
+  scene.fog = new THREE.Fog('#e2e7ed', 36, 85);
+  const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 220);
+  const TARGET = new THREE.Vector3(5.0, 2.9, 0);
+  let controls = null;
+  let userMoved = false;
+  let camAnim = null;
+  if (THREE.OrbitControls) {
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.08;
+    controls.enableZoom = true;
+    controls.zoomSpeed = 0.9;
+    controls.enableRotate = true;
+    controls.rotateSpeed = 0.75;
+    controls.autoRotate = false;
+    controls.autoRotateSpeed = 1.1;
+    controls.minDistance = 6;
+    controls.maxDistance = 70;
+    controls.maxPolarAngle = Math.PI * 0.495;
+    controls.target.copy(TARGET);
+    controls.addEventListener('start', () => { camAnim = null; userMoved = true; });
+  }
+
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x7d8894, 0.85));
+  const sun = new THREE.DirectionalLight(0xffffff, 0.78); sun.position.set(-6, 14, 10); scene.add(sun);
+  const fillL = new THREE.DirectionalLight(0xffffff, 0.32); fillL.position.set(14, 6, -8); scene.add(fillL);
+
+  // ---------- helpers ----------
+  const canvasTex = (w, h, draw) => {
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    draw(c.getContext('2d'), w, h);
+    const t = new THREE.CanvasTexture(c);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 4;
+    return t;
+  };
+  const add = (o, p) => { (p || scene).add(o); return o; };
+  const box = (w, h, d, mat, x, y, z, p) => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+    m.position.set(x, y, z); return add(m, p);
+  };
+  const bar = (a, b, t, mat, p) => {
+    const dx = Math.abs(b[0] - a[0]), dy = Math.abs(b[1] - a[1]), dz = Math.abs(b[2] - a[2]);
+    return box(dx ? dx + t : t, dy ? dy + t : t, dz ? dz + t : t, mat,
+      (a[0] + b[0]) / 2, (a[1] + b[1]) / 2, (a[2] + b[2]) / 2, p);
+  };
+  const frameEdges = (x0, x1, y0, y1, z0, z1, t, mat, p) => {
+    for (const y of [y0, y1]) for (const z of [z0, z1]) bar([x0, y, z], [x1, y, z], t, mat, p);
+    for (const x of [x0, x1]) {
+      for (const z of [z0, z1]) bar([x, y0, z], [x, y1, z], t, mat, p);
+      for (const y of [y0, y1]) bar([x, y, z0], [x, y, z1], t, mat, p);
+    }
+  };
+  const shapeGeo = (w, h, holes) => {
+    const s = new THREE.Shape();
+    s.moveTo(-w / 2, -h / 2); s.lineTo(w / 2, -h / 2); s.lineTo(w / 2, h / 2); s.lineTo(-w / 2, h / 2);
+    (holes || []).forEach(([x0, y0, x1, y1]) => {
+      const hp = new THREE.Path();
+      hp.moveTo(x0, y0); hp.lineTo(x0, y1); hp.lineTo(x1, y1); hp.lineTo(x1, y0);
+      s.holes.push(hp);
+    });
+    return new THREE.ShapeGeometry(s);
+  };
+
+  // ---------- materials ----------
+  const std = (o) => new THREE.MeshStandardMaterial(o);
+  const MAT = {
+    alu: std({ color: 0xe0e4e8, metalness: 0.55, roughness: 0.32 }),
+    base: std({ color: 0x3a4149, metalness: 0.4, roughness: 0.65 }),
+    louver: std({ color: 0xa9b2bb, metalness: 0.5, roughness: 0.45 }),
+    dark: std({ color: 0x56616c, metalness: 0.4, roughness: 0.5 }),
+    fan: std({ color: 0x2d6db4, metalness: 0.35, roughness: 0.4 }),
+    blade: std({ color: 0x9fb3c6, metalness: 0.6, roughness: 0.35, side: THREE.DoubleSide }),
+    cone: std({ color: 0xc4ccd4, metalness: 0.55, roughness: 0.4, side: THREE.DoubleSide }),
+    motor: std({ color: 0x2b3a4a, metalness: 0.45, roughness: 0.5 }),
+    ss: std({ color: 0xdde2e6, metalness: 0.85, roughness: 0.22 }),
+    pipe: std({ color: 0x2f7fc4, metalness: 0.2, roughness: 0.45 }),
+    poly: std({ color: 0xd6e7f4, metalness: 0, roughness: 0.4, transparent: true, opacity: 0.3, depthWrite: false, side: THREE.DoubleSide }),
+    baffle: std({ color: 0xb7c0c9, metalness: 0.45, roughness: 0.5, transparent: true, opacity: 0.85, depthWrite: false, side: THREE.DoubleSide }),
+    water: std({ color: 0x3f9be0, transparent: true, opacity: 0.62, roughness: 0.15, metalness: 0.1 }),
+    filterFrame: std({ color: 0x2d6db4, metalness: 0.3, roughness: 0.45 })
+  };
+  const panelMat = (c) => std({ color: c, metalness: 0.3, roughness: 0.58, side: THREE.DoubleSide, transparent: true, opacity: 1 });
+  const PANEL = { front: panelMat(0xd3d9df), top: panelMat(0xdfe4e9), side: panelMat(0xcbd2d9), bottom: panelMat(0xc0c7ce) };
+  const panelSets = { front: [], top: [], side: [], bottom: [] };
+  const ROT = { xy: [0, 0, 0], xz: [-Math.PI / 2, 0, 0], zy: [0, Math.PI / 2, 0] };
+  const panel = (kind, plane, w, h, pos, holes) => {
+    const m = new THREE.Mesh(shapeGeo(w, h, holes), PANEL[kind]);
+    m.position.set(pos[0], pos[1], pos[2]);
+    m.rotation.set(ROT[plane][0], ROT[plane][1], ROT[plane][2]);
+    panelSets[kind].push(m);
+    return add(m);
+  };
+
+  const plateTex = canvasTex(64, 256, (x, w, h) => {
+    for (let y = 0; y < h; y += 16) {
+      const g = x.createLinearGradient(0, y, 0, y + 16);
+      g.addColorStop(0, '#c4ced7'); g.addColorStop(0.5, '#eef3f7'); g.addColorStop(1, '#b1bcc6');
+      x.fillStyle = g; x.fillRect(0, y, w, 16);
+    }
+  });
+  plateTex.repeat.set(1, 4);
+  const plateMat = std({ map: plateTex, color: 0xffffff, metalness: 0.5, roughness: 0.3, emissive: 0x000000 });
+
+  const padTex = canvasTex(256, 256, (x, w, h) => {
+    x.fillStyle = '#d2ad6c'; x.fillRect(0, 0, w, h);
+    x.strokeStyle = 'rgba(104,72,28,.55)'; x.lineWidth = 2;
+    for (let i = -h; i < w + h; i += 16) { x.beginPath(); x.moveTo(i, 0); x.lineTo(i + h, h); x.stroke(); }
+    x.strokeStyle = 'rgba(255,240,205,.4)'; x.lineWidth = 1.5;
+    for (let i = -h; i < w + h; i += 16) { x.beginPath(); x.moveTo(i, h); x.lineTo(i + h * 0.25, 0); x.stroke(); }
+  });
+  padTex.repeat.set(2.4, 2.8);
+  const padMat = std({ map: padTex, roughness: 0.92, metalness: 0 });
+
+  const filterTex = canvasTex(128, 32, (x, w, h) => {
+    for (let i = 0; i < w; i += 16) {
+      const g = x.createLinearGradient(i, 0, i + 16, 0);
+      g.addColorStop(0, '#f4f7fa'); g.addColorStop(0.5, '#c6d0da'); g.addColorStop(1, '#f4f7fa');
+      x.fillStyle = g; x.fillRect(i, 0, 16, h);
+    }
+  });
+  filterTex.repeat.set(5, 1);
+  const filterMat = std({ map: filterTex, roughness: 0.85, metalness: 0 });
+
+  // ---------- floor ----------
+  const floorMat = new THREE.MeshBasicMaterial({ color: '#d3dae2' });
+  const floor = add(new THREE.Mesh(new THREE.PlaneGeometry(160, 160), floorMat));
+  floor.rotation.x = -Math.PI / 2; floor.position.y = -0.226;
+  const shadowTex = canvasTex(256, 256, (x, w, h) => {
+    const g = x.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w / 2);
+    g.addColorStop(0, 'rgba(0,0,0,0.36)'); g.addColorStop(0.55, 'rgba(0,0,0,0.15)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+    x.fillStyle = g; x.fillRect(0, 0, w, h);
+  });
+  shadowTex.wrapS = shadowTex.wrapT = THREE.ClampToEdgeWrapping;
+  const H = 4, L = 10.2, Z = 1.6, SEC = [0, 1.8, 4.6, 7.8, 10.2];
+  const blob = add(new THREE.Mesh(new THREE.PlaneGeometry(15, 6.4),
+    new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false })));
+  blob.rotation.x = -Math.PI / 2; blob.position.set(L / 2, -0.221, 0);
+  let grid = null;
+
+  // ---------- casing ----------
+  for (let i = 0; i < 4; i++) {
+    const x0 = SEC[i], x1 = SEC[i + 1], w = x1 - x0, cx = (x0 + x1) / 2;
+    panel('front', 'xy', w, H, [cx, H / 2, Z]);
+    panel('side', 'xy', w, H, [cx, H / 2, -Z]);
+    panel('bottom', 'xz', w, 2 * Z, [cx, 0, 0]);
+    let holes = [];
+    if (i === 0) holes = [[0.95 - cx, -0.8, 1.75 - cx, 0.8]];
+    if (i === 3) holes = [[7.85 - cx, -0.85, 8.35 - cx, 0.85]];
+    panel('top', 'xz', w, 2 * Z, [cx, H, 0], holes);
+  }
+  panel('side', 'zy', 2 * Z, H, [0, H / 2, 0], [[-1.25, 0.35 - H / 2, 1.25, 2.35 - H / 2]]);
+  panel('side', 'zy', 2 * Z, H, [L, H / 2, 0], [[-1.25, 0.3 - H / 2, 1.25, 1.85 - H / 2]]);
+
+  const T = 0.075;
+  for (const y of [0, H]) for (const z of [-Z, Z]) bar([0, y, z], [L, y, z], T, MAT.alu);
+  for (const x of SEC) {
+    for (const z of [-Z, Z]) bar([x, 0, z], [x, H, z], T, MAT.alu);
+    for (const y of [0, H]) bar([x, y, -Z], [x, y, Z], T, MAT.alu);
+  }
+  for (const z of [-Z + 0.12, Z - 0.12]) box(L + 0.24, 0.22, 0.16, MAT.base, L / 2, -0.11, z);
+  for (const x of SEC) box(0.16, 0.22, 2 * Z - 0.24, MAT.base, x, -0.11, 0);
+
+  // top box (secondary fan housing)
+  const TB = { x0: 6.4, x1: 10.0, y0: 4, y1: 5.2, z: 0.9 };
+  const tbw = TB.x1 - TB.x0, tbh = TB.y1 - TB.y0, tbcx = (TB.x0 + TB.x1) / 2, tbcy = (TB.y0 + TB.y1) / 2;
+  panel('front', 'xy', tbw, tbh, [tbcx, tbcy, TB.z]);
+  panel('side', 'xy', tbw, tbh, [tbcx, tbcy, -TB.z]);
+  panel('top', 'xz', tbw, 2 * TB.z, [tbcx, TB.y1, 0]);
+  panel('side', 'zy', 2 * TB.z, tbh, [TB.x0, tbcy, 0]);
+  panel('side', 'zy', 2 * TB.z, tbh, [TB.x1, tbcy, 0], [[-0.75, -0.45, 0.75, 0.45]]);
+  frameEdges(TB.x0, TB.x1, TB.y0, TB.y1, -TB.z, TB.z, 0.05, MAT.alu);
+
+  // fresh-air duct collar
+  const CO = { x0: 0.95, x1: 1.75, y0: 4, y1: 5.1, z: 0.8 };
+  const cow = CO.x1 - CO.x0, coh = CO.y1 - CO.y0, cocx = (CO.x0 + CO.x1) / 2, cocy = (CO.y0 + CO.y1) / 2;
+  panel('front', 'xy', cow, coh, [cocx, cocy, CO.z]);
+  panel('side', 'xy', cow, coh, [cocx, cocy, -CO.z]);
+  panel('side', 'zy', 2 * CO.z, coh, [CO.x0, cocy, 0]);
+  panel('side', 'zy', 2 * CO.z, coh, [CO.x1, cocy, 0]);
+  const fl = 0.1, ft = 0.05;
+  bar([CO.x0 - fl, CO.y1, -CO.z - fl], [CO.x1 + fl, CO.y1, -CO.z - fl], ft, MAT.alu);
+  bar([CO.x0 - fl, CO.y1, CO.z + fl], [CO.x1 + fl, CO.y1, CO.z + fl], ft, MAT.alu);
+  bar([CO.x0 - fl, CO.y1, -CO.z - fl], [CO.x0 - fl, CO.y1, CO.z + fl], ft, MAT.alu);
+  bar([CO.x1 + fl, CO.y1, -CO.z - fl], [CO.x1 + fl, CO.y1, CO.z + fl], ft, MAT.alu);
+  for (const x of [CO.x0, CO.x1]) for (const z of [-CO.z, CO.z]) bar([x, CO.y0, z], [x, CO.y1, z], 0.04, MAT.alu);
+
+  // louvers
+  const louvers = (x, y0, y1, zh, n) => {
+    const g = add(new THREE.Group());
+    const pitch = (y1 - y0) / n;
+    for (let i = 0; i < n; i++) {
+      const b = box(0.025, pitch * 1.2, 2 * zh, MAT.louver, x, y0 + pitch * (i + 0.5), 0, g);
+      b.rotation.z = 0.7;
+    }
+    frameEdges(x - 0.03, x + 0.03, y0, y1, -zh, zh, 0.045, MAT.alu, g);
+    return g;
+  };
+  louvers(0, 0.35, 2.35, 1.25, 8);
+  louvers(L, 0.3, 1.85, 1.25, 6);
+  louvers(TB.x1, 4.15, 5.05, 0.75, 4);
+
+  // ---------- internals ----------
+  box(0.05, H - 0.08, 2 * Z - 0.08, plateMat, 1.8, H / 2, 0); // separation plate
+  const baffle = box(L - 2.4, 0.035, 2 * Z - 0.08, MAT.baffle, (2.4 + L) / 2, 2.0, 0);
+  baffle.renderOrder = 1;
+
+  const makeFan = (x, y, r, inlet) => {
+    const g = add(new THREE.Group()); g.position.set(x, y, 0);
+    const wheel = add(new THREE.Group(), g);
+    const nb = 9;
+    for (let i = 0; i < nb; i++) {
+      const pv = add(new THREE.Group(), wheel);
+      pv.rotation.x = i * Math.PI * 2 / nb;
+      const b = box(r * 0.42, r * 0.62, 0.03, MAT.blade, 0, r * 0.55, 0, pv);
+      b.rotation.y = 0.55;
+    }
+    const disc = add(new THREE.Mesh(new THREE.CylinderGeometry(r * 0.97, r * 0.97, 0.03, 40), MAT.fan), wheel);
+    disc.rotation.z = Math.PI / 2; disc.position.x = -inlet * r * 0.24;
+    const ring = add(new THREE.Mesh(new THREE.TorusGeometry(r * 0.95, 0.028, 8, 48), MAT.fan), wheel);
+    ring.rotation.y = Math.PI / 2; ring.position.x = inlet * r * 0.22;
+    const hub = add(new THREE.Mesh(new THREE.CylinderGeometry(r * 0.17, r * 0.17, r * 0.55, 20), MAT.motor), wheel);
+    hub.rotation.z = Math.PI / 2;
+    const cone = add(new THREE.Mesh(new THREE.CylinderGeometry(inlet > 0 ? r * 0.8 : r * 1.12, inlet > 0 ? r * 1.12 : r * 0.8, r * 0.42, 40, 1, true), MAT.cone), g);
+    cone.rotation.z = Math.PI / 2; cone.position.x = inlet * r * 0.48;
+    const motor = add(new THREE.Mesh(new THREE.CylinderGeometry(r * 0.3, r * 0.3, r * 0.7, 24), MAT.motor), g);
+    motor.rotation.z = Math.PI / 2; motor.position.x = -inlet * r * 0.72;
+    return { g, wheel };
+  };
+  const mainFan = makeFan(3.6, 1.0, 0.72, 1);
+  box(0.36, 0.78, 0.5, MAT.dark, 3.6 - 0.72 * 0.72, 0.39, 0);
+  const secFan = makeFan(9.0, 4.6, 0.42, -1);
+  box(0.2, 0.47, 0.3, MAT.dark, 9.0 + 0.42 * 0.72, 4.235, 0);
+
+  const HX = { x0: 4.8, x1: 6.4, y0: 0.34, y1: 3.82, z: 1.5 };
+  const hxGeo = new THREE.BoxGeometry(HX.x1 - HX.x0 - 0.04, HX.y1 - HX.y0 - 0.04, 0.008);
+  for (let i = 0; i < 22; i++) {
+    const m = new THREE.Mesh(hxGeo, MAT.poly);
+    m.position.set((HX.x0 + HX.x1) / 2, (HX.y0 + HX.y1) / 2, -HX.z + 0.06 + i * (2 * HX.z - 0.12) / 21);
+    m.renderOrder = 1; add(m);
+  }
+  frameEdges(HX.x0, HX.x1, HX.y0, HX.y1, -HX.z, HX.z, 0.05, MAT.dark);
+
+  const PD = { x0: 7.0, x1: 7.5, y0: 0.34, y1: 3.82, z: 1.5 };
+  box(PD.x1 - PD.x0, PD.y1 - PD.y0, 2 * PD.z, padMat, (PD.x0 + PD.x1) / 2, (PD.y0 + PD.y1) / 2, 0);
+  frameEdges(PD.x0, PD.x1, PD.y0, PD.y1, -PD.z, PD.z, 0.045, MAT.dark);
+
+  const FF = { x0: 9.0, x1: 9.2, y0: 0.12, y1: 1.94, z: 1.5 };
+  box(FF.x1 - FF.x0, FF.y1 - FF.y0, 2 * FF.z, filterMat, (FF.x0 + FF.x1) / 2, (FF.y0 + FF.y1) / 2, 0);
+  frameEdges(FF.x0, FF.x1, FF.y0, FF.y1, -FF.z, FF.z, 0.045, MAT.filterFrame);
+
+  const pipe = (a, b, r) => {
+    const v = new THREE.Vector3(b[0] - a[0], b[1] - a[1], b[2] - a[2]);
+    const len = v.length();
+    const m = add(new THREE.Mesh(new THREE.CylinderGeometry(r, r, len, 14), MAT.pipe));
+    m.position.set((a[0] + b[0]) / 2, (a[1] + b[1]) / 2, (a[2] + b[2]) / 2);
+    m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), v.normalize());
+    return m;
+  };
+  const hy = 3.93;
+  const nozGeo = new THREE.ConeGeometry(0.035, 0.07, 10);
+  for (const x of [5.2, 6.0, 7.25]) {
+    pipe([x, hy, -1.45], [x, hy, 1.45], 0.045);
+    for (let z = -1.3; z <= 1.31; z += 0.26) {
+      const n = add(new THREE.Mesh(nozGeo, MAT.pipe));
+      n.position.set(x, hy - 0.07, z); n.rotation.x = Math.PI;
+    }
+  }
+  pipe([5.2, hy, -1.45], [7.75, hy, -1.45], 0.05);
+  pipe([7.75, 0.3, -1.45], [7.75, hy, -1.45], 0.05);
+
+  const TK = { x0: 4.7, x1: 7.95, z: 1.5 };
+  box(TK.x1 - TK.x0, 0.025, 2 * TK.z, MAT.ss, (TK.x0 + TK.x1) / 2, 0.0325, 0);
+  for (const z of [-TK.z, TK.z]) box(TK.x1 - TK.x0, 0.3, 0.025, MAT.ss, (TK.x0 + TK.x1) / 2, 0.17, z);
+  for (const x of [TK.x0, TK.x1]) box(0.025, 0.3, 2 * TK.z, MAT.ss, x, 0.17, 0);
+  const waterPlane = add(new THREE.Mesh(new THREE.PlaneGeometry(TK.x1 - TK.x0 - 0.04, 2 * TK.z - 0.04), MAT.water));
+  waterPlane.rotation.x = -Math.PI / 2; waterPlane.position.set((TK.x0 + TK.x1) / 2, 0.23, 0); waterPlane.renderOrder = 2;
+  const pump = add(new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.26, 20), MAT.motor));
+  pump.position.set(7.75, 0.18, -1.3);
+
+  // flow arrows at inlets and outlets
+  const coneGeo = new THREE.ConeGeometry(0.17, 0.42, 24);
+  const arrow = (pos, rotZ, color) => {
+    const m = add(new THREE.Mesh(coneGeo, new THREE.MeshBasicMaterial({ color })));
+    m.position.set(pos[0], pos[1], pos[2]); m.rotation.z = rotZ; return m;
+  };
+  const arrOut = arrow([-2.95, 1.3, 0], -Math.PI / 2, '#e8692e');
+  const arrFresh = arrow([1.35, 7.2, 0], 0, '#5fb4ee');
+  const arrRet = arrow([12.85, 1.0, 0], Math.PI / 2, '#8f7ff2');
+  const arrSup = arrow([12.55, 4.6, 0], -Math.PI / 2, '#139bd8');
+
+  // A true clipping plane for the cross-section view. Keep the inlet side at x <= 5.6.
+  const clipCross = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 5.6);
+  const clippableMaterials = new Set();
+  scene.traverse((obj) => {
+    if (!obj.isMesh || !obj.material) return;
+    (Array.isArray(obj.material) ? obj.material : [obj.material]).forEach((m) => clippableMaterials.add(m));
+  });
+  const applySectionClip = (active) => {
+    clippableMaterials.forEach((m) => {
+      m.clippingPlanes = active ? [clipCross] : null;
+      m.clipShadows = !!active;
+      m.needsUpdate = true;
+    });
+  };
+
+  // ---------- airflow particles ----------
+  const toRGB = (h) => { const c = new THREE.Color(h); return [c.r, c.g, c.b]; };
+  const PATHS = [
+    {
+      id: 'fresh', n: 560,
+      pts: [[-2.6, 1.3], [1.35, 1.3], [1.35, 4.0], [1.35, 6.9]],
+      w: [0.45, 0.3, 0.3, 0.3], zs: [1.15, 1.15, 0.7, 0.62],
+      stopsOn: [[0, '#e8692e'], [3.6, '#e8692e'], [6.65, '#5fb4ee'], [99, '#5fb4ee']],
+      stopsOff: [[0, '#e8692e'], [3.6, '#e8692e'], [6.65, '#f0a062'], [99, '#f0a062']]
+    },
+    {
+      id: 'ret', n: 1150,
+      pts: [[12.5, 1.0], [2.1, 1.0], [2.1, 3.0], [8.1, 3.0], [8.1, 4.6], [12.2, 4.6]],
+      w: [0.38, 0.22, 0.22, 0.2, 0.2, 0.26], zs: [1.15, 1.15, 1.15, 1.15, 0.65, 0.6],
+      stopsOn: [[0, '#8f7ff2'], [5.0, '#8f7ff2'], [5.5, '#45bfa4'], [6.1, '#45bfa4'], [7.7, '#16a3cf'], [10.2, '#16a3cf'],
+        [12.4, '#86d6c4'], [15.1, '#86d6c4'], [16.7, '#16a3cf'], [17.3, '#16a3cf'], [17.8, '#139bd8'], [99, '#139bd8']],
+      stopsOff: [[0, '#8f7ff2'], [10.2, '#8f7ff2'], [12.4, '#b3a7f6'], [99, '#b3a7f6']]
+    }
+  ];
+  let total = 0;
+  for (const p of PATHS) {
+    const n = p.pts.length;
+    p.cum = new Float32Array(n); p.dir = [];
+    for (let i = 1; i < n; i++) {
+      const dx = p.pts[i][0] - p.pts[i - 1][0], dy = p.pts[i][1] - p.pts[i - 1][1], l = Math.hypot(dx, dy);
+      p.cum[i] = p.cum[i - 1] + l; p.dir.push([dx / l, dy / l]);
+    }
+    p.len = p.cum[n - 1];
+    p.on = p.stopsOn.map(([s, c]) => [s].concat(toRGB(c)));
+    p.off = p.stopsOff.map(([s, c]) => [s].concat(toRGB(c)));
+    p.s = new Float32Array(p.n); p.v = new Float32Array(p.n); p.ph = new Float32Array(p.n); p.lane = [];
+    for (let i = 0; i < p.n; i++) {
+      const u = Math.random() * 2 - 1;
+      p.s[i] = Math.random() * p.len; p.v[i] = Math.random() * 2 - 1; p.ph[i] = Math.random() * 6.283;
+      const lp = new Float32Array(n * 2);
+      for (let j = 0; j < n; j++) {
+        let nx = 0, ny = 0;
+        if (j > 0) { nx += -p.dir[j - 1][1]; ny += p.dir[j - 1][0]; }
+        if (j < n - 1) { nx += -p.dir[j][1]; ny += p.dir[j][0]; }
+        lp[2 * j] = p.pts[j][0] + u * p.w[j] * nx;
+        lp[2 * j + 1] = p.pts[j][1] + u * p.w[j] * ny;
+      }
+      p.lane.push(lp);
+    }
+    p.offset = total; total += p.n; p.vis = 1; p.target = 1;
+  }
+
+  const ptMat = (size) => new THREE.ShaderMaterial({
+    uniforms: { uScale: { value: 400 }, uSize: { value: size } },
+    vertexShader: [
+      'attribute vec3 aColor; attribute float aAlpha; attribute float aSize;',
+      'uniform float uScale; uniform float uSize;',
+      'varying vec3 vColor; varying float vAlpha;',
+      'void main(){ vColor=aColor; vAlpha=aAlpha; vec4 mv=modelViewMatrix*vec4(position,1.0);',
+      ' gl_PointSize=max(1.0,uSize*aSize*uScale/-mv.z); gl_Position=projectionMatrix*mv; }'
+    ].join('\n'),
+    fragmentShader: [
+      'varying vec3 vColor; varying float vAlpha;',
+      'void main(){ vec2 c=gl_PointCoord-0.5; float d=length(c); if(d>0.5) discard;',
+      ' float a=smoothstep(0.5,0.12,d)*vAlpha; if(a<0.01) discard; gl_FragColor=vec4(vColor,a); }'
+    ].join('\n'),
+    transparent: true, depthWrite: false
+  });
+  const makePoints = (count, size, sizeMin, sizeRange) => {
+    const geo = new THREE.BufferGeometry();
+    const pos = new Float32Array(count * 3), col = new Float32Array(count * 3), al = new Float32Array(count), sz = new Float32Array(count);
+    for (let i = 0; i < count; i++) sz[i] = sizeMin + Math.random() * sizeRange;
+    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3).setUsage(THREE.DynamicDrawUsage));
+    geo.setAttribute('aColor', new THREE.BufferAttribute(col, 3).setUsage(THREE.DynamicDrawUsage));
+    geo.setAttribute('aAlpha', new THREE.BufferAttribute(al, 1).setUsage(THREE.DynamicDrawUsage));
+    geo.setAttribute('aSize', new THREE.BufferAttribute(sz, 1));
+    const mat = ptMat(size);
+    const pts = new THREE.Points(geo, mat);
+    pts.frustumCulled = false;
+    add(pts);
+    return { geo, pos, col, al, mat, pts };
+  };
+  const air = makePoints(total, 0.1, 0.75, 0.5); air.pts.renderOrder = 10;
+
+  const DN = 320;
+  const drops = makePoints(DN, 0.055, 0.7, 0.6); drops.pts.renderOrder = 11;
+  const dState = [];
+  const wc = toRGB('#3f9be0');
+  for (let i = 0; i < DN; i++) {
+    const inHX = Math.random() < 0.72;
+    dState.push({
+      x: inHX ? 4.86 + Math.random() * 1.48 : 7.04 + Math.random() * 0.42,
+      z: -1.42 + Math.random() * 2.84,
+      y: 0.34 + Math.random() * 3.5,
+      sp: 1.3 + Math.random() * 0.8
+    });
+    drops.col[3 * i] = wc[0]; drops.col[3 * i + 1] = wc[1]; drops.col[3 * i + 2] = wc[2];
+  }
+  drops.geo.attributes.aColor.needsUpdate = true;
+
+  const colorAt = (stops, s, out) => {
+    let j = 0;
+    while (j < stops.length - 2 && s > stops[j + 1][0]) j++;
+    const a = stops[j], b = stops[j + 1];
+    const f = Math.min(1, Math.max(0, (s - a[0]) / ((b[0] - a[0]) || 1)));
+    out[0] = a[1] + (b[1] - a[1]) * f; out[1] = a[2] + (b[2] - a[2]) * f; out[2] = a[3] + (b[3] - a[3]) * f;
+  };
+
+  const BASE_SPEED = 1.6;
+  let flowSpeed = 1;
+  let playing = !reduceMotion, waterMix = 1, waterTarget = 1, time = 0;
+  const cA = [0, 0, 0], cB = [0, 0, 0];
+
+  const updateAir = (dt) => {
+    const { pos, col, al } = air;
+    for (const p of PATHS) {
+      const cum = p.cum, len = p.len, last = p.pts.length - 2, zs = p.zs;
+      for (let i = 0, k = p.offset; i < p.n; i++, k++) {
+        let s = p.s[i] + BASE_SPEED * flowSpeed * dt;
+        if (s >= len) s -= len;
+        p.s[i] = s;
+        let seg = 0;
+        while (seg < last && s > cum[seg + 1]) seg++;
+        const f = (s - cum[seg]) / (cum[seg + 1] - cum[seg]);
+        const lp = p.lane[i];
+        const wob = Math.sin(time * 2.2 + p.ph[i]) * 0.022;
+        pos[3 * k] = lp[2 * seg] + (lp[2 * seg + 2] - lp[2 * seg]) * f + wob;
+        pos[3 * k + 1] = lp[2 * seg + 1] + (lp[2 * seg + 3] - lp[2 * seg + 1]) * f + wob;
+        pos[3 * k + 2] = p.v[i] * (zs[seg] + (zs[seg + 1] - zs[seg]) * f);
+        colorAt(p.on, s, cA); colorAt(p.off, s, cB);
+        col[3 * k] = cB[0] + (cA[0] - cB[0]) * waterMix;
+        col[3 * k + 1] = cB[1] + (cA[1] - cB[1]) * waterMix;
+        col[3 * k + 2] = cB[2] + (cA[2] - cB[2]) * waterMix;
+        al[k] = Math.max(0, Math.min(1, s / 0.7, (len - s) / 0.9)) * p.vis * 0.95;
+      }
+    }
+    const at = air.geo.attributes;
+    at.position.needsUpdate = true; at.aColor.needsUpdate = true; at.aAlpha.needsUpdate = true;
+  };
+
+  const updateDrops = (dt) => {
+    const { pos, al } = drops;
+    for (let i = 0; i < DN; i++) {
+      const d = dState[i];
+      d.y -= d.sp * flowSpeed * dt;
+      if (d.y < 0.34) d.y += 3.5;
+      pos[3 * i] = d.x; pos[3 * i + 1] = d.y; pos[3 * i + 2] = d.z;
+      al[i] = waterMix * Math.min(1, (d.y - 0.34) / 0.25, (3.86 - d.y) / 0.2) * 0.9;
+    }
+    drops.geo.attributes.position.needsUpdate = true;
+    drops.geo.attributes.aAlpha.needsUpdate = true;
+  };
+
+  // ---------- casing modes ----------
+  let mode = 'cutaway';
+  const MODES = {
+    cutaway: { front: 0, top: 0.32, side: 0.94, bottom: 1 },
+    glass: { front: 0.1, top: 0.14, side: 0.16, bottom: 0.5 },
+    solid: { front: 1, top: 1, side: 1, bottom: 1 }
+  };
+  const setMode = (m) => {
+    mode = m;
+    const o = MODES[m];
+    for (const k in PANEL) {
+      const mat = PANEL[k], op = o[k];
+      mat.opacity = op; mat.transparent = op < 1; mat.depthWrite = op >= 1; mat.needsUpdate = true;
+      panelSets[k].forEach((p) => { p.visible = op > 0; });
+    }
+  };
+  setMode('cutaway');
+
+  // ---------- labels ----------
+  const LBL = [
+    { t: 'Outdoor air in', p: [-2.3, 1.78, 0], c: 'fresh' },
+    { t: 'Fresh air to room, dry', p: [1.35, 6.55, 0], c: 'fresh' },
+    { t: 'Separation plate', p: [1.8, 3.35, 1.58], internal: true },
+    { t: 'Main fan', p: [3.6, 1.8, 0.55], internal: true },
+    { t: 'Polymer plate HX', p: [5.6, 3.55, 1.5], internal: true },
+    { t: 'Cooling pad', p: [7.25, 2.75, 1.5], internal: true },
+    { t: 'Water header', p: [6.0, 3.98, 1.45], internal: true },
+    { t: 'SS tank + pump', p: [6.3, 0.22, 1.5], internal: true },
+    { t: 'Baffle', p: [9.6, 2.02, 1.55], internal: true },
+    { t: 'Fine filter', p: [9.1, 1.5, 1.5], internal: true },
+    { t: 'Room return air in', p: [12.3, 1.48, 0], c: 'ret' },
+    { t: 'Secondary fan', p: [9.0, 5.06, 0.4], internal: true },
+    { t: 'Supply to room', p: [12.0, 5.05, 0], c: 'ret' }
+  ];
+  LBL.forEach((l) => {
+    const el = document.createElement('div');
+    el.className = 'lbl' + (l.c ? ' s-' + l.c : '');
+    el.innerHTML = '<i></i><span></span>';
+    el.querySelector('span').textContent = l.t;
+    el.hidden = true;
+    labelLayer.appendChild(el);
+    l.el = el; l.v = new THREE.Vector3(l.p[0], l.p[1], l.p[2]); l.shown = false; l.flip = false; l.ew = 0;
+  });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => LBL.forEach((l) => { l.ew = 0; }));
+  let labelsOn = true;
+  const v3 = new THREE.Vector3();
+  const placeLabels = () => {
+    const w = stage.clientWidth, h = stage.clientHeight;
+    for (const l of LBL) {
+      let show = labelsOn && !(l.internal && mode === 'solid');
+      if (l.c === 'fresh' && PATHS[0].target === 0) show = false;
+      if (l.c === 'ret' && PATHS[1].target === 0) show = false;
+      let x = 0, y = 0;
+      if (show) {
+        v3.copy(l.v).project(camera);
+        if (v3.z > 1 || v3.z < -1) show = false;
+        else {
+          x = (v3.x * 0.5 + 0.5) * w; y = (-v3.y * 0.5 + 0.5) * h;
+          if (x < -10 || x > w + 10 || y < 0 || y > h) show = false;
+        }
+      }
+      if (l.shown !== show) { l.el.hidden = !show; l.shown = show; }
+      if (!show) continue;
+      const flip = x > w * 0.72;
+      if (flip !== l.flip) { l.el.classList.toggle('flip', flip); l.flip = flip; }
+      if (flip && !l.ew) l.ew = l.el.offsetWidth;
+      const tx = flip ? x - l.ew + 4 : x - 4;
+      l.el.style.transform = 'translate(' + tx.toFixed(1) + 'px,' + (y - 9).toFixed(1) + 'px)';
+    }
+  };
+
+  // ---------- camera views ----------
+  const VIEWS = {
+    iso: { dir: [-0.42, 0.5, 1], dist: 21 },
+    section: { dir: [0, 0.06, 1], dist: 20 },
+    cross: { dir: [1, 0.12, 0.03], dist: 17, clip: true },
+    top: { dir: [0, 1, 0.05], dist: 21 },
+    end: { dir: [0.95, 0.42, 0.62], dist: 20 }
+  };
+  let currentView = 'iso';
+  const fitScale = () => Math.max(1, 1.75 / camera.aspect);
+  const goView = (name, instant) => {
+    const v = VIEWS[name]; if (!v) return;
+    currentView = name; userMoved = false;
+    applySectionClip(!!v.clip);
+    const to = TARGET.clone().add(new THREE.Vector3(v.dir[0], v.dir[1], v.dir[2]).normalize().multiplyScalar(v.dist * fitScale()));
+    if (instant || reduceMotion) {
+      camera.position.copy(to);
+      if (controls) controls.target.copy(TARGET);
+      camAnim = null;
+    } else {
+      camAnim = { from: camera.position.clone(), to, fromT: controls ? controls.target.clone() : TARGET.clone(), t: 0 };
+    }
+  };
+
+  // ---------- theme ----------
+  const applyTheme = () => {
+    const cs = getComputedStyle(document.documentElement);
+    const g = (n, f) => (cs.getPropertyValue(n).trim() || f);
+    const sc = g('--scene', '#e2e7ed');
+    scene.background.set(sc); scene.fog.color.set(sc);
+    floorMat.color.set(g('--floor', '#d3dae2'));
+    if (grid) { scene.remove(grid); grid.geometry.dispose(); grid.material.dispose(); }
+    grid = new THREE.GridHelper(70, 70, g('--grid-strong', '#b3bdc9'), g('--grid', '#c6ced8'));
+    grid.position.y = -0.219; grid.material.transparent = true; grid.material.opacity = 0.75;
+    scene.add(grid);
+  };
+  applyTheme();
+  if (window.matchMedia) {
+    const mq = matchMedia('(prefers-color-scheme: dark)');
+    if (mq.addEventListener) mq.addEventListener('change', applyTheme); else if (mq.addListener) mq.addListener(applyTheme);
+  }
+  new MutationObserver(applyTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme', 'class', 'style'] });
+
+  // ---------- sizing ----------
+  const resize = () => {
+    const w = Math.max(1, stage.clientWidth), h = Math.max(1, stage.clientHeight);
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h; camera.updateProjectionMatrix();
+    const scale = h * renderer.getPixelRatio() / (2 * Math.tan(camera.fov * Math.PI / 360));
+    air.mat.uniforms.uScale.value = scale; drops.mat.uniforms.uScale.value = scale;
+    if (!userMoved) goView(currentView, true);
+  };
+  if (window.ResizeObserver) new ResizeObserver(resize).observe(stage); else window.addEventListener('resize', resize);
+  resize();
+  goView('iso', true);
+
+  let onScreen = true;
+  if (window.IntersectionObserver) new IntersectionObserver((e) => { onScreen = e[0].isIntersecting; }).observe(stage);
+
+  // ---------- controls UI ----------
+  const bPlay = document.getElementById('bPlay');
+  const bRotate = document.getElementById('bRotate');
+  const bWater = document.getElementById('bWater');
+  const bLabels = document.getElementById('bLabels');
+  const speedRange = document.getElementById('speedRange');
+  const speedValue = document.getElementById('speedValue');
+  const syncPlay = () => { bPlay.textContent = playing ? 'Pause' : 'Play'; bPlay.setAttribute('aria-pressed', String(playing)); };
+  syncPlay();
+  bPlay.addEventListener('click', () => { playing = !playing; syncPlay(); });
+  if (controls) {
+    bRotate.addEventListener('click', () => {
+      controls.autoRotate = !controls.autoRotate;
+      bRotate.setAttribute('aria-pressed', String(controls.autoRotate));
+    });
+    controls.addEventListener('start', () => {
+      if (!controls.autoRotate) return;
+      controls.autoRotate = false;
+      bRotate.setAttribute('aria-pressed', 'false');
+    });
+  } else {
+    bRotate.disabled = true;
+  }
+  speedRange.addEventListener('input', () => {
+    flowSpeed = Number(speedRange.value) / 100;
+    speedValue.textContent = flowSpeed.toFixed(2) + '×';
+  });
+  const zoomBy = (factor) => {
+    const offset = camera.position.clone().sub(controls ? controls.target : TARGET);
+    const next = THREE.MathUtils.clamp(offset.length() * factor, controls ? controls.minDistance : 6, controls ? controls.maxDistance : 70);
+    camera.position.copy((controls ? controls.target : TARGET).clone().add(offset.setLength(next)));
+    userMoved = true; camAnim = null;
+  };
+  document.getElementById('bZoomIn').addEventListener('click', () => zoomBy(0.78));
+  document.getElementById('bZoomOut').addEventListener('click', () => zoomBy(1.28));
+  document.getElementById('bResetView').addEventListener('click', () => {
+    document.querySelectorAll('[data-k="view"] button').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.v === 'iso')));
+    goView('iso');
+  });
+  window.__ahuDebug = {
+    get flowSpeed() { return flowSpeed; },
+    get playing() { return playing; },
+    get view() { return currentView; },
+    get mode() { return mode; },
+    get waterTarget() { return waterTarget; },
+    get labelsOn() { return labelsOn; },
+    get autoRotate() { return !!(controls && controls.autoRotate); },
+    get cameraDistance() { return camera.position.distanceTo(controls ? controls.target : TARGET); },
+    get cameraPosition() { return camera.position.toArray(); },
+    get cameraTarget() { return (controls ? controls.target : TARGET).toArray(); },
+    get streamTargets() { return PATHS.map((p) => p.target); },
+    get clipActive() { return !!MAT.alu.clippingPlanes; },
+    get firstParticle() { return Array.from(air.pos.slice(0, 3)); }
+  };
+  bWater.addEventListener('click', () => {
+    waterTarget = waterTarget ? 0 : 1;
+    bWater.textContent = waterTarget ? 'Water on' : 'Water off';
+    bWater.setAttribute('aria-pressed', String(!!waterTarget));
+  });
+  bLabels.addEventListener('click', () => { labelsOn = !labelsOn; bLabels.setAttribute('aria-pressed', String(labelsOn)); });
+  document.querySelectorAll('.seg').forEach((grp) => {
+    grp.addEventListener('click', (e) => {
+      const b = e.target.closest('button'); if (!b) return;
+      const k = grp.dataset.k, v = b.dataset.v;
+      grp.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      if (k === 'stream') {
+        PATHS[0].target = (v === 'both' || v === 'fresh') ? 1 : 0;
+        PATHS[1].target = (v === 'both' || v === 'ret') ? 1 : 0;
+      }
+      if (k === 'mode') setMode(v);
+      if (k === 'view') goView(v);
+    });
+  });
+
+  // ---------- loop ----------
+  const cHot = new THREE.Color('#f0a062'), cCool = new THREE.Color('#5fb4ee');
+  const cRetOff = new THREE.Color('#b3a7f6'), cRetOn = new THREE.Color('#139bd8');
+  let lastT = performance.now();
+  updateAir(0); updateDrops(0);
+  const frame = (now) => {
+    requestAnimationFrame(frame);
+    const dt = Math.min(0.05, (now - lastT) / 1000); lastT = now;
+    if (!onScreen) return;
+    const step = playing ? dt : 0;
+    time += step;
+    waterMix += (waterTarget - waterMix) * Math.min(1, dt * 3);
+    for (const p of PATHS) p.vis += (p.target - p.vis) * Math.min(1, dt * 5);
+    updateAir(step);
+    updateDrops(step);
+    mainFan.wheel.rotation.x += step * 9 * flowSpeed;
+    secFan.wheel.rotation.x -= step * 12 * flowSpeed;
+    const pulse = waterMix * (0.6 + 0.4 * Math.sin(time * 2.4));
+    plateMat.emissive.setRGB(0.04 * pulse, 0.18 * pulse, 0.38 * pulse);
+    MAT.water.opacity = 0.35 + 0.27 * waterMix;
+    arrFresh.material.color.copy(cHot).lerp(cCool, waterMix);
+    arrSup.material.color.copy(cRetOff).lerp(cRetOn, waterMix);
+    arrOut.visible = arrFresh.visible = PATHS[0].vis > 0.4;
+    arrRet.visible = arrSup.visible = PATHS[1].vis > 0.4;
+    if (camAnim) {
+      camAnim.t = Math.min(1, camAnim.t + dt / 0.9);
+      const e = camAnim.t < 0.5 ? 2 * camAnim.t * camAnim.t : 1 - Math.pow(-2 * camAnim.t + 2, 2) / 2;
+      camera.position.lerpVectors(camAnim.from, camAnim.to, e);
+      if (controls) controls.target.lerpVectors(camAnim.fromT, TARGET, e);
+      if (camAnim.t >= 1) camAnim = null;
+    }
+    if (controls) controls.update(); else camera.lookAt(TARGET);
+    renderer.render(scene, camera);
+    placeLabels();
+  };
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
